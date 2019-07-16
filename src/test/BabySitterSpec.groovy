@@ -3,20 +3,21 @@ import spock.lang.Specification
 class BabySitterSpec extends Specification {
     def babysitter = new BabySitter()
 
-    def "happy path :: it returns an int"(int start, int bed, int end) {
+    def "calculateWage :: happy path"(int start, int bed, int end, int expected) {
         given:
         def wage = babysitter.calculateWage(start, bed, end)
 
         expect:
         wage instanceof Integer
+        wage == expected
 
         where:
-        start   | bed   | end
-        5       | 9     | 16
-        5       | 9     | 9
-        6       | 6     | 10
-        7       | 8     | 9
-        10      | 11    | 12
+        start   | bed   | end   | expected
+        5       | 9     | 16    | 0
+        5       | 9     | 9     | 0
+        6       | 6     | 10    | 0
+        7       | 8     | 9     | 0
+        10      | 11    | 12    | 0
     }
 
     def "it validates inputs"(int start, int bed, int end) {
