@@ -1,11 +1,10 @@
 import spock.lang.Specification
 
 class BabySitterSpec extends Specification {
-    def babysitter = new BabySitter()
 
     def "calculateWage :: happy path"(int start, int bed, int end, int expected) {
         given:
-        def wage = babysitter.calculateWage(start, bed, end)
+        def wage = BabySitter.calculateWage(start, bed, end)
 
         expect:
         wage instanceof Integer
@@ -23,7 +22,7 @@ class BabySitterSpec extends Specification {
 
     def "it validates inputs"(int start, int bed, int end) {
         given:
-        def wage = babysitter.calculateWage(start, bed, end)
+        def wage = BabySitter.calculateWage(start, bed, end)
 
         expect:
         wage == -1

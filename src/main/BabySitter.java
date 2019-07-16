@@ -6,7 +6,7 @@ public class BabySitter {
 
     }
 
-    public int calculateWage(final int startTime, final int bedTime, final int endTime) {
+    public static int calculateWage(final int startTime, final int bedTime, final int endTime) {
 
         if (startTime > 11 || startTime < 5) {
             return -1;
@@ -22,7 +22,7 @@ public class BabySitter {
         return calculatePay(timeSheet);
     }
 
-    private TimeSheet calculateTimeSheet(final int startTime, final int bedTime, final int endTime) {
+    private static TimeSheet calculateTimeSheet(final int startTime, final int bedTime, final int endTime) {
         final int startToBedHours = bedTime - startTime;
         final int bedTimeHours = MIDNIGHT - bedTime;
         final int midnightToEndHours = endTime - MIDNIGHT;
@@ -30,7 +30,7 @@ public class BabySitter {
         return new TimeSheet(startToBedHours, bedTimeHours, midnightToEndHours);
     }
 
-    private int calculatePay(final TimeSheet timeSheet) {
+    private static int calculatePay(final TimeSheet timeSheet) {
         final int startPay = timeSheet.getStartHours() * PayRates.START_TO_BED;
         final int bedTimePay = timeSheet.getBedTimeHours() * PayRates.BED_TO_MIDNIGHT;
         final int endPay = timeSheet.getEndHours() * PayRates.MIDNIGHT_TO_END;
