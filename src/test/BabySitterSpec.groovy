@@ -13,11 +13,12 @@ class BabySitterSpec extends Specification {
 
         where:
         start   | bed   | end   | expected
-        5       | 9     | 16    | 0
-        5       | 9     | 9     | 0
-        6       | 6     | 10    | 0
-        7       | 8     | 9     | 0
-        10      | 11    | 12    | 0
+        5       | 9     | 16    | 136
+        10      | 11    | 12    | 20
+        9       | 11    | 14    | 64
+        6       | 6     | 10    | 32
+        5       | 9     | 9     | 48
+        7       | 8     | 9     | 20
     }
 
     def "it validates inputs"(int start, int bed, int end) {
