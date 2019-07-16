@@ -5,4 +5,7 @@ public class BabySitter {
 
     }
 
+    public int calculateWage() {
+        return 0;
+    }
 }
