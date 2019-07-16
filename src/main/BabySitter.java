@@ -1,9 +1,6 @@
 public class BabySitter {
 
     private static int MIDNIGHT = 12;
-    private static int START_RATE = 12;
-    private static int BED_TIME_RATE = 8;
-    private static int END_RATE = 16;
 
     public static void main(String[] args) {
 
@@ -25,9 +22,9 @@ public class BabySitter {
         final int bedTimeHours = MIDNIGHT - bedTime;
         final int midnightToEndHours = endTime - MIDNIGHT;
 
-        final int startPay = startToBedHours * START_RATE;
-        final int bedTimePay = bedTimeHours * BED_TIME_RATE;
-        final int endPay = midnightToEndHours * END_RATE;
+        final int startPay = startToBedHours * PayRates.START_TO_BED;
+        final int bedTimePay = bedTimeHours * PayRates.BED_TO_MIDNIGHT;
+        final int endPay = midnightToEndHours * PayRates.MIDNIGHT_TO_END;
 
         return startPay + bedTimePay + endPay;
     }
