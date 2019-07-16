@@ -18,13 +18,22 @@ public class BabySitter {
             return -1;
         }
 
+        final TimeSheet timeSheet = calculateTimeSheet(startTime, bedTime, endTime);
+        return calculatePay(timeSheet);
+    }
+
+    private TimeSheet calculateTimeSheet(final int startTime, final int bedTime, final int endTime) {
         final int startToBedHours = bedTime - startTime;
         final int bedTimeHours = MIDNIGHT - bedTime;
         final int midnightToEndHours = endTime - MIDNIGHT;
 
-        final int startPay = startToBedHours * PayRates.START_TO_BED;
-        final int bedTimePay = bedTimeHours * PayRates.BED_TO_MIDNIGHT;
-        final int endPay = midnightToEndHours * PayRates.MIDNIGHT_TO_END;
+        return new TimeSheet(startToBedHours, bedTimeHours, midnightToEndHours);
+    }
+
+    private int calculatePay(final TimeSheet timeSheet) {
+        final int startPay = timeSheet.getStartHours() * PayRates.START_TO_BED;
+        final int bedTimePay = timeSheet.getBedTimeHours() * PayRates.BED_TO_MIDNIGHT;
+        final int endPay = timeSheet.getEndHours() * PayRates.MIDNIGHT_TO_END;
 
         return startPay + bedTimePay + endPay;
     }
