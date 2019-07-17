@@ -1,3 +1,6 @@
+import objects.PayRates;
+import objects.TimeSheet;
+
 public class BabySitter {
 
     public static void main(String[] args) {
