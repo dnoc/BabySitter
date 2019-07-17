@@ -1,7 +1,5 @@
 public class BabySitter {
 
-    private static int MIDNIGHT = 12;
-
     public static void main(String[] args) {
 
     }
@@ -11,7 +9,7 @@ public class BabySitter {
 
         validateHourInputs(startTime, bedTime, endTime);
 
-        final TimeSheet timeSheet = calculateTimeSheet(startTime, bedTime, endTime);
+        final TimeSheet timeSheet = TimeSheet.buildFromShiftTimes(startTime, bedTime, endTime);
 
         return calculatePay(timeSheet);
     }
@@ -28,32 +26,6 @@ public class BabySitter {
         else if (endTime < startTime || endTime > 16) {
             throw new IllegalArgumentException("Invalid End Time");
         }
-    }
-
-    private static TimeSheet calculateTimeSheet(final int startTime, final int bedTime, final int endTime) {
-        final int startToBedHours;
-        final int bedTimeHours;
-        final int midnightToEndHours;
-
-        if (bedTime < MIDNIGHT && endTime <= MIDNIGHT) {
-            startToBedHours = bedTime - startTime;
-            bedTimeHours = endTime - bedTime;
-            midnightToEndHours = 0;
-        } else if (bedTime >= MIDNIGHT) {
-            startToBedHours = MIDNIGHT - startTime;
-            bedTimeHours = 0;
-            midnightToEndHours = endTime - MIDNIGHT;
-        } else if (startTime >= MIDNIGHT) {
-            startToBedHours = 0;
-            bedTimeHours = 0;
-            midnightToEndHours = endTime - startTime;
-        } else {
-            startToBedHours = bedTime - startTime;
-            bedTimeHours = MIDNIGHT - bedTime;
-            midnightToEndHours = endTime - MIDNIGHT;
-        }
-
-        return new TimeSheet(startToBedHours, bedTimeHours, midnightToEndHours);
     }
 
     private static int calculatePay(final TimeSheet timeSheet) {
