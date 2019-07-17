@@ -23,9 +23,27 @@ public class BabySitter {
     }
 
     private static TimeSheet calculateTimeSheet(final int startTime, final int bedTime, final int endTime) {
-        final int startToBedHours = bedTime - startTime;
-        final int bedTimeHours = MIDNIGHT - bedTime;
-        final int midnightToEndHours = endTime - MIDNIGHT;
+        final int startToBedHours;
+        final int bedTimeHours;
+        final int midnightToEndHours;
+
+        if (bedTime < MIDNIGHT && endTime <= MIDNIGHT) {
+            startToBedHours = bedTime - startTime;
+            bedTimeHours = endTime - bedTime;
+            midnightToEndHours = 0;
+        } else if (bedTime >= MIDNIGHT) {
+            startToBedHours = MIDNIGHT - startTime;
+            bedTimeHours = 0;
+            midnightToEndHours = endTime - MIDNIGHT;
+        } else if (startTime >= MIDNIGHT) {
+            startToBedHours = 0;
+            bedTimeHours = 0;
+            midnightToEndHours = endTime - startTime;
+        } else {
+            startToBedHours = bedTime - startTime;
+            bedTimeHours = MIDNIGHT - bedTime;
+            midnightToEndHours = endTime - MIDNIGHT;
+        }
 
         return new TimeSheet(startToBedHours, bedTimeHours, midnightToEndHours);
     }
