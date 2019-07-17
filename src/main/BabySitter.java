@@ -6,20 +6,28 @@ public class BabySitter {
 
     }
 
-    public static int calculateWage(final int startTime, final int bedTime, final int endTime) {
+    public static int calculateWage(final int startTime, final int bedTime, final int endTime)
+            throws IllegalArgumentException {
 
-        if (startTime > 11 || startTime < 5) {
-            return -1;
-        }
-        else if (endTime < startTime || endTime > 16) {
-            return -1;
-        }
-        else if (startTime > bedTime || bedTime > endTime) {
-            return -1;
-        }
+        validateHourInputs(startTime, bedTime, endTime);
 
         final TimeSheet timeSheet = calculateTimeSheet(startTime, bedTime, endTime);
+
         return calculatePay(timeSheet);
+    }
+
+    private static void validateHourInputs(final int startTime, final int bedTime, final int endTime)
+            throws IllegalArgumentException {
+
+        if (startTime > 11 || startTime < 5) {
+            throw new IllegalArgumentException("Invalid Start Time");
+        }
+        else if (startTime > bedTime || bedTime > endTime) {
+            throw new IllegalArgumentException("Invalid Bed Time");
+        }
+        else if (endTime < startTime || endTime > 16) {
+            throw new IllegalArgumentException("Invalid End Time");
+        }
     }
 
     private static TimeSheet calculateTimeSheet(final int startTime, final int bedTime, final int endTime) {

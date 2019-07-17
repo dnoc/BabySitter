@@ -20,12 +20,12 @@ class BabySitterSpec extends Specification {
         7       | 8     | 9     | 20
     }
 
-    def "it validates inputs"(int start, int bed, int end) {
-        given:
-        def wage = BabySitter.calculateWage(start, bed, end)
+    def "it throws IllegalArgumentException for invalid inputs"(int start, int bed, int end) {
+        when:
+        BabySitter.calculateWage(start, bed, end)
 
-        expect:
-        wage == -1
+        then:
+        thrown(IllegalArgumentException)
 
         where:
         start   | bed   | end
